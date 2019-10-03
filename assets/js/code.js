@@ -32,7 +32,6 @@ function generateCol(row, num){
 
 function generateFlags(){
     var random = Math.random()*19;
-
     return random;
 }
 
