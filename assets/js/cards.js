@@ -30,6 +30,7 @@ var cards=[
     {
         "name": "Ireland",
         "country": "IRE",
+        "call" : "false" //Para validar si fue llamado o no podríamos cambiar de false a true
     },
     {
         "name": "China",
