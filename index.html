@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link rel="icon" href="assets/images/hand.png" type="image/png" sizes="16x16">
+        <link href="https://fonts.googleapis.com/css?family=Cairo|Rajdhani&display=swap" rel="stylesheet" type="text/css" href="assets/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    </head>
+
+    <body onload="generateTable()">
+        <h1>Memotest</h1>
+        <div id="cont">
+            <p>Dificultad: </p>
+            <select id="difficulty" name="difficulty" onchange="generateTable()">
+                <option value="4">Fácil</option>
+                <option value="5">Medio</option>
+                <option value="6">Difícil</option>
+            </select>
+
+            <p>Motivo: </p>
+            <select id="motive" name="motive" onchange="changeMotive()">
+                <option value="1">Violeta</option>
+                <option value="2">Azul</option>
+                <option value="3">Gris</option>
+            </select>
+
+            <div id="game">
+
+                <table id="table">
+                </table>
+                
+            </div>
+        </div>
+
+</body>
+<script src="assets/js/jquery-3.4.1.min.js"></script>
+<script src="assets/js/code.js"></script>
+<script type="text/javascript" src="assets/js/cards.js"></script>
+</html>
