@@ -24,7 +24,7 @@ function generateTable(){
 function generateCol(row, num){
     var col;
     for(j=0; j<num; j++){
-        col+="<td><img src='"+flags[cards[j].country]+"'></img></td>";
+        col+="<td><img width='70' src='"+flags[cards[j].country]+"'></img></td>";
     }
     return col;
 }
