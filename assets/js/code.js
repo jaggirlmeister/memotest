@@ -23,10 +23,17 @@ function generateTable(){
 
 function generateCol(row, num){
     var col;
+    var random = Math.floor(Math.random()*18);
     for(j=0; j<num; j++){
-        col+="<td><img width='70' src='"+flags[cards[j].country]+"'></img></td>";
+        col+="<td><img width='70' src='"+flags[cards[random].country]+"'></img></td>";
     }
     return col;
+}
+
+function generateFlags(){
+    var random = Math.random()*19;
+
+    return random;
 }
 
 function changeMotive(){
