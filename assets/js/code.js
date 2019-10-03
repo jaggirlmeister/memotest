@@ -1,35 +1,33 @@
-var tableGame = [ [-1, -2, -3, -4], [-5, -6, -7, -8], [-9, -10, -11, -12], [-13, -14, -15, -16, -17],[],[]];
-
-//Tablas de 4x4, 5x5, 6x6
-
-
-function generateTable(){
-
+var tableGame = [
+    ["v", "v", "v", "v", "v", "v"],
+    ["v", "v", "v", "v", "v", "v"],
+    ["v", "v", "v", "v", "v", "v"],
+    ["v", "v", "v", "v", "v", "v"],
+    ["v", "v", "v", "v", "v", "v"],
+    ["v", "v", "v", "v", "v", "v"],
+ ];
+ //Tablas de 4x4, 5x5, 6x6
+ function generateTable(){
     $("#table").empty();
-
     var num = parseInt(document.getElementById("difficulty").value);
     for(i=0; i<num; i++){
-
         $("#table").append("<tr>"+generateCol(i, num)+"</tr>");
     }
-}
-
-function generateCol(row, num){
+ }
+ function generateCol(row, num){
     var col;
+    var random = Math.floor(Math.random()*18);
     for(j=0; j<num; j++){
-        col+="<td></td>";
+        col+="<td><img width='70' src='"+flags[cards[random].country]+"'></img></td>";
     }
     return col;
-}
-
-function generateFlags(){
+ }
+ function generateFlags(){
     var random = Math.random()*19;
     return random;
-}
-
-function changeMotive(){
+ }
+ function changeMotive(){
     var motive = parseInt(document.getElementById("motive").value);
     $("td").attr("", "blue");
     alert(motive);
-}
-
+ }
