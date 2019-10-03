@@ -22,6 +22,11 @@ function generateCol(row, num){
     return col;
 }
 
+function generateFlags(){
+    var random = Math.random()*19;
+    return random;
+}
+
 function changeMotive(){
     var motive = parseInt(document.getElementById("motive").value);
     $("td").attr("", "blue");
