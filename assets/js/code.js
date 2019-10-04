@@ -32,7 +32,6 @@ function generateMatrix(){
 
  function random(){
     var random = Math.floor(Math.random()*18);
-    alert(random);
     return random;
  }
 
