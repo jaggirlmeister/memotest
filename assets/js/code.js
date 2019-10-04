@@ -17,7 +17,7 @@ function generateMatrix(){
     $("#table").empty();
     var num = parseInt(document.getElementById("difficulty").value);
     for(i=0; i<num; i++){
-        $("#table").append("<tr>"+generateCol(i, num)+"</tr>");
+        $("#table").append("<div>"+generateCol(i, num)+"</div>");
     }
  }
 
@@ -25,22 +25,18 @@ function generateMatrix(){
     var col;
     
     for(j=0; j<num; j++){
-        col+="<td><img width='70' src='"+flags[cards[random()].country]+"'></img></td>";
+        col+="<div class='flip-card'><div class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[cards[random()].country]+"'></img></div><div class='flip-card-back'></div></div></div>";
     }
     return col;
  }
 
  function random(){
     var random = Math.floor(Math.random()*18);
+    alert(random);
     return random;
  }
 
- function generateFlags(){
-    var random = Math.random()*19;
-    return random;
- }
  function changeMotive(){
     var motive = parseInt(document.getElementById("motive").value);
     $("td").attr("", "blue");
-    alert(motive);
  }
