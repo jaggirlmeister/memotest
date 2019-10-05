@@ -8,7 +8,7 @@ h1{
 #cont{
     margin: 0 auto;
     text-align: center;
-    width: 50%;
+    width: 80%;
     font-family: 'Cairo', sans-serif;
 }
 
@@ -99,9 +99,9 @@ option{
   .flip-card-back {
     background-color: indigo;
     color: white;
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
   }
 
 .flip-card:hover .flip-card-inner {
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
   }
