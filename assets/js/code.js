@@ -4,6 +4,7 @@ var positions=[];
 var num = parseInt(document.getElementById("difficulty").value);
 
 var countries=[];
+var shuffledCountries=[];
 
 for(var k=0; k<num*num; k++){
         var ran = random();
@@ -25,26 +26,16 @@ function generateMatrix(){
 
         for(var j=0; j<num; j++){
             table[i].push(0);
-            //var flagNum = countries[j];
-            //,flag:countries[j]
-            positions.push({row:i,col:j,flag:"XXX"}); //Asignar pares de países sin que se repitan.
+            positions.push({row:i,col:j,flag:""}); //Asigna un valor vacío que luego vamos a llenar con el código de la bandera.
         }
+    }
+    //llenamos el espacio vacío
+    for(var n=0; n<num*num; n++){
+        positions[n].flag = countries[n];
     }
     console.log(positions);
 }
 
-
-/*function x(){
-
-Asignar 1 país a al array countries[] y repetirlo una vez para formar un par.
-No repetir un país ya usado.
-
-La función debería devolver un array así:
-[AAA, AAA, BBB, BBB ... ];
-}
-
-O: NO usar una función. Directamente asignar todos los valores de countries[] afuera. Arriba de generateMatrix();
-*/
 
  function generateTable(){
     $("#table").empty();
@@ -59,9 +50,6 @@ O: NO usar una función. Directamente asignar todos los valores de countries[] a
     generateMatrix();
     $("#prueba").append(JSON.stringify(positions));
     shuffle(positions);
-    for(var m =0; m<num*num; m++){
-        positions[m].flag = countries[m];
-    }
     $("#prueba").append(JSON.stringify(positions));
 
  }
@@ -87,13 +75,11 @@ O: NO usar una función. Directamente asignar todos los valores de countries[] a
     
  }
 
- //Para cargar las imágenes: USAR LA MISMA LÓGICA QUE ARRIBA. QUE VAYA DE A 2. ELIGE EL MISMO CÓDIGO DE LA BANDERA Y SE LAS ASIGNA A 2 POSICIONES, DEPSUÉS PASA A OTRA BANDERA Y ASÍ HASTA EL INICIO DEL ARRAY.
- // Supongo que esto cambiaría la forma en que mostramos las imágenes en la tabla generateCol.
-
  function generateCol(row, num){
     var col="";
     
     for(var j=0; j<num; j++){
+        //var actualFlag = positions[j].flag; Esto no funciona porque todavía no existe la variable positions. Pero es lo que hay que hacer.
         col+="<div class='flip-card'><div class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[cards[random()].country]+"'></img>"+cards[random()].country+"</div><div class='flip-card-back'></div></div></div>";
     }
     return col;
