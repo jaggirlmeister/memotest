@@ -3,6 +3,8 @@ var positions=[];
 //propiedades de position: row: i, col: j, country: XXX
 var num = parseInt(document.getElementById("difficulty").value);
 
+var chosenNumbers = [];
+
 var countries=[];
 var shuffledCountries=[];
 
@@ -14,7 +16,7 @@ for(var k=0; k<num*num; k++){
     }
 console.log(countries);
 }
-
+//select onClick generateMatrix();
 function generateMatrix(){
 
     var num = parseInt(document.getElementById("difficulty").value);
@@ -86,14 +88,25 @@ function generateMatrix(){
  }
 
 
+/*
+Podemos: 
+O crear un numero random y compararlo con posiciones en un array al que le vamos sumando numeros usados con .push .
+O crear un array con numeros entre 0 y 18 ordenados. Luego pasárselo a la función shuffle() para que los mezcle y que la función random() devuelva un número de ese array.
+
+Nota: esto que dejé escrito no funciona*/
+
  function random(){
     var random = Math.floor(Math.random()*18);
+
+    chosenNumbers.push(random);
+
+    console.log(chosenNumbers);
     return random;
  }
 
+ //cambiar el 18 por flags.length
 
  function changeMotive(){
     var motive = parseInt(document.getElementById("motive").value);
     $("td").attr("", "blue");
  }
-
