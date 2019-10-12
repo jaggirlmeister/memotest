@@ -91,7 +91,8 @@ function generateMatrix(){
 /*
 Podemos: 
 O crear un numero random y compararlo con posiciones en un array al que le vamos sumando numeros usados con .push .
-O crear un array con numeros entre 0 y 18 ordenados. Luego pasárselo a la función shuffle() para que los mezcle y que la función random() devuelva un número de ese array.
+
+-> O crear un array con numeros entre 0 y 18 ordenados (fuera de la función). Luego pasárselo a la función shuffle() para que los mezcle y que la función random() devuelva el último número de ese array. con .pop borrar el número ya usado del array.
 
 Nota: esto que dejé escrito no funciona*/
 
