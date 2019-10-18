@@ -99,11 +99,17 @@ Nota: esto que dejé escrito no funciona*/
  function random(){
     var random = Math.floor(Math.random()*18);
 
-    chosenNumbers.push(random);
+    chosenNumbers.push(random); //esto no funciona. 
 
     console.log(chosenNumbers);
     return random;
  }
+
+ /*funcion nueva que: 
+ *crear un array con un máximo de la cantidad de select (num en el resto del código). 
+ *Mandar el array a la función random() y que nos devuelva el array mezclado. 
+ *return: devulve el último número del array.
+ */
 
  //cambiar el 18 por flags.length
 
