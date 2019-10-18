@@ -4,59 +4,15 @@ var positions=[];
 var num = parseInt(document.getElementById("difficulty").value);
 
 var chosenNumbers = [];
+var executed = false;
 
 var countries=[];
 var shuffledCountries=[];
 
-for(var k=0; k<num*num; k++){
-        var ran = random();
-        var selectedCountry = cards[ran].country;
-    for(var l=0; l<2; l++){
-        countries.push(selectedCountry);
-    }
-console.log(countries);
-}
-//select onClick generateMatrix();
-function generateMatrix(){
-
-    var num = parseInt(document.getElementById("difficulty").value);
-
-    //var country= countries[i];
-
-    for(var i=0; i<num; i++){
-        table.push([]);
-
-        for(var j=0; j<num; j++){
-            table[i].push(0);
-            positions.push({row:i,col:j,flag:""}); //Asigna un valor vacío que luego vamos a llenar con el código de la bandera.
-        }
-    }
-    //llenamos el espacio vacío
-    for(var n=0; n<num*num; n++){
-        positions[n].flag = countries[n];
-    }
-    console.log(positions);
-}
+var totalFlags=18;
 
 
- function generateTable(){
-    $("#table").empty();
-    var num = parseInt(document.getElementById("difficulty").value);
-    for(var i=0; i<num; i++){
-        $("#table").append("<div>"+generateCol(i, num)+"</div>");
-    }
-    fill(num);
- }
-
- function fill(){
-    generateMatrix();
-    $("#prueba").append(JSON.stringify(positions));
-    shuffle(positions);
-    $("#prueba").append(JSON.stringify(positions));
-
- }
-
- var shuffle = function (array) {
+var shuffle = function (array) {
 
 	var currentIndex = array.length;
 	var temporaryValue, randomIndex;
@@ -77,42 +33,100 @@ function generateMatrix(){
     
  }
 
+//meter todo esto en una función para poder vaciar el array
+function createRandomFlags(){
+    countries = [];
+    shuffledCountries =[];
+    for(var k=0; k<num*num; k++){
+        var ran = random();
+        console.info(ran);
+        var selectedCountry = cards[ran].country;
+        for(var l=0; l<2; l++){
+            countries.push(selectedCountry);
+        }
+        console.log(countries);
+    }
+}
+//HAY QUE HACER QUE EL VALOR NUM LLEGUE A TODAS LAS VARIABLES Y SE ACTUALICE
+//select onClick generateMatrix();
+function generateMatrix(){
+
+    var num = parseInt(document.getElementById("difficulty").value);
+
+    //var country= countries[i];
+
+    for(var i=0; i<num; i++){
+        table.push([]);
+
+        for(var j=0; j<num; j++){
+            table[i].push(0);
+            positions.push({row:i,col:j,flag:""}); //flag asigna un valor vacío que luego vamos a llenar con el código de la bandera.
+        }
+    }
+    //llenamos el espacio vacío
+    createRandomFlags();
+    for(var n=0; n<num*num; n++){
+        positions[n].flag = countries[n];
+    }
+    console.log(positions);
+}
+
+ function generateTable(){
+    executed=false;
+    $("#table").empty();
+    var num = parseInt(document.getElementById("difficulty").value);
+    for(var i=0; i<num; i++){
+        $("#table").append("<div>"+generateCol(i, num)+"</div>");
+    }
+    fill(num);
+ }
+
+ function fill(){
+    generateMatrix();
+    $("#prueba").append(JSON.stringify(positions));
+    shuffle(positions);
+    $("#prueba").append(JSON.stringify(positions));
+
+ }
+
+ /*hay que lograr parsarle el valor de la bandera a esta función. El problema es que generateCol() se ejecuta ANTES que la matrix. Es decir, la matrix todavía no existe cuando esta función se ejecuta.
+ IDEAS:
+ 1. Crear todos los tags vacíos. Una vez que se termine de ejecutar la matrix crear una función que llamando pór ID cambie los src pór los corespondientes.
+ 
+*/
  function generateCol(row, num){
     var col="";
     
     for(var j=0; j<num; j++){
         //var actualFlag = positions[j].flag; Esto no funciona porque todavía no existe la variable positions. Pero es lo que hay que hacer.
-        col+="<div class='flip-card'><div class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[cards[random()].country]+"'></img>"+cards[random()].country+"</div><div class='flip-card-back'></div></div></div>";
+        col+="<div class='flip-card'><div class='flip-card-inner'><div id='"+row+j+"' class='flip-card-front'><img width='70' src='"+flags[cards[randomTry()].country]+"'></img>"+cards[randomTry()].country+"</div><div class='flip-card-back'></div></div></div>";
     }
     return col;
  }
 
-
-/*
-Podemos: 
-O crear un numero random y compararlo con posiciones en un array al que le vamos sumando numeros usados con .push .
-
--> O crear un array con numeros entre 0 y 18 ordenados (fuera de la función). Luego pasárselo a la función shuffle() para que los mezcle y que la función random() devuelva el último número de ese array. con .pop borrar el número ya usado del array.
-
-Nota: esto que dejé escrito no funciona*/
-
- function random(){
+//Esta función solo trae las banderas y luego hay que eliminarla.
+ function randomTry(){
     var random = Math.floor(Math.random()*18);
 
-    chosenNumbers.push(random); //esto no funciona. 
-
-    console.log(chosenNumbers);
     return random;
  }
 
- /*funcion nueva que: 
- *crear un array con un máximo de la cantidad de select (num en el resto del código). 
- *Mandar el array a la función random() y que nos devuelva el array mezclado. 
- *return: devulve el último número del array.
- */
+ //Esta función crea un array con números ordenado de 0 a 18 (cantidad total de banderas) y luego los desordena (SÓLO LA PRIMERA VEZ QUE SE LLAMA, es por eso que está la variable executed). Random() devuelve el último número de ese array desordenado. Luego lo elimina con .pop()
 
- //cambiar el 18 por flags.length
+ function random(){
+    if (executed==false){
+        for(var p=0; p<totalFlags; p++){
+            chosenNumbers.push(p);
+        }
+        shuffle(chosenNumbers);
+        executed=true;
+    }
+    var last = chosenNumbers.pop();
+    return last;
+ }
 
+
+//Esta función es para cambiar los motivos y la vamos a usar al final
  function changeMotive(){
     var motive = parseInt(document.getElementById("motive").value);
     $("td").attr("", "blue");
