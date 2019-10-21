@@ -10,6 +10,7 @@ var countries=[];
 var shuffledCountries=[];
 
 var totalFlags=18;
+var positionFlag;
 
 
 var shuffle = function (array) {
@@ -71,24 +72,6 @@ function generateMatrix(){
     console.log(positions);
 }
 
- function generateTable(){
-    executed=false;
-    $("#table").empty();
-    var num = parseInt(document.getElementById("difficulty").value);
-    for(var i=0; i<num; i++){
-        $("#table").append("<div>"+generateCol(i, num)+"</div>");
-    }
-    fill(num);
- }
-
- function fill(){
-    generateMatrix();
-    $("#prueba").append(JSON.stringify(positions));
-    shuffle(positions);
-    $("#prueba").append(JSON.stringify(positions));
-
- }
-
  /*hay que lograr parsarle el valor de la bandera a esta función. El problema es que generateCol() se ejecuta ANTES que la matrix. Es decir, la matrix todavía no existe cuando esta función se ejecuta.
  IDEAS:
  1. Crear todos los tags vacíos. Una vez que se termine de ejecutar la matrix crear una función que llamando pór ID cambie los src pór los corespondientes.
@@ -123,6 +106,26 @@ function generateMatrix(){
     }
     var last = chosenNumbers.pop();
     return last;
+ }
+
+ function generateTable(){
+    executed=false;
+    $("#table").empty();
+    var num = parseInt(document.getElementById("difficulty").value);
+    fill(num);
+    for(var i=0; i<num; i++){
+        positionFlag=shuffledCountries[i];
+        console.info(positionFlag);
+        $("#table").append("<div>"+generateCol(i, num)+"</div>");
+    }
+ }
+
+ function fill(){
+    generateMatrix();
+    $("#prueba").append(JSON.stringify(positions));
+    shuffle(positions);
+    $("#prueba").append(JSON.stringify(positions));
+
  }
 
 
