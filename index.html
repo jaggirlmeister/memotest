@@ -7,11 +7,11 @@
         <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
     </head>
 
-    <body onload="generateTable()">
+    <body onload="loadGame()">
         <h1>Memotest</h1>
         <div id="cont">
             <p>Dificultad: </p>
-            <select id="difficulty" name="difficulty" onchange="fill()">
+            <select id="difficulty" name="difficulty" onchange="loadGame()">
                 <option value="4">Fácil</option>
                 <option value="5">Medio</option>
                 <option value="6">Difícil</option>

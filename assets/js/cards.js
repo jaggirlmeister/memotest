@@ -5,8 +5,8 @@ var cards=[
         "call" : "0",
     },
     {
-        "name": "Australia",
-        "country": "AUS",
+        "name": "Canada",
+        "country": "CAN",
         "call" : "0",
     },
     {
@@ -20,28 +20,28 @@ var cards=[
         "call" : "0",
     },
     {
-        "name": "New Zeland",
+        "name": "Nueva Zelanda",
         "country": "NEW",
         "call" : "0",
     },
     {
-        "name": "Norway",
+        "name": "Noruega",
         "country": "NOR",
         "call" : "0",
     },
     {
-        "name": "Denmark",
+        "name": "Dinamarca",
         "country": "DEN",
         "call" : "0",
     },
     {
-        "name": "Ireland",
+        "name": "Irlanda",
         "country": "IRE",
         "call" : "false" //Para validar si fue llamado o no podríamos cambiar de false a true
     },
     {
-        "name": "China",
-        "country": "CHI",
+        "name": "Tailandia",
+        "country": "THA",
         "call" : "0",
     },
     {
@@ -50,7 +50,7 @@ var cards=[
         "call" : "0",
     },
     {
-        "name": "United States",
+        "name": "Estados Unidos",
         "country": "USA",
         "call" : "0",
     },
@@ -60,7 +60,7 @@ var cards=[
         "call" : "0",
     },
     {
-        "name": "France",
+        "name": "Francia",
         "country": "FRA",
         "call" : "0",
     },
@@ -70,12 +70,12 @@ var cards=[
         "call" : "0",
     },
     {
-        "name": "Ukraine",
+        "name": "Ucrania",
         "country": "UKR",
         "call" : "0",
     },
     {
-        "name": "United Kingdom",
+        "name": "Reino Unido",
         "country": "UKB",
         "call" : "0",
     },
@@ -85,7 +85,7 @@ var cards=[
         "call" : "0",
     },
     {
-        "name": "Turkey",
+        "name": "Turquia",
         "country": "TUR",
         "call" : "0",
     },
