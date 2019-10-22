@@ -73,9 +73,9 @@ function generateMatrix(num){
         positions[n].flag = countries[n];
     }
     console.log(positions);
-    $("#prueba").append(JSON.stringify(positions));
+    /*$("#prueba").append(JSON.stringify(positions));
     shuffle(positions);
-    $("#prueba").append(JSON.stringify(positions));
+    $("#prueba").append(JSON.stringify(positions)); por las dudas lo dejo*/
 }
 
  function createTable(){
