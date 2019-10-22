@@ -27,7 +27,8 @@ function loadGame(){
 
 //meter todo esto en una función para poder vaciar el array
 function createRandomFlags(num){
-    for(var k=0; k<num*num; k++){
+    
+    for(var k=0; k<Math.floor(num*num)/2; k++){
         var ran = chosenNumbers[k];
         console.info(ran);
         var selectedCountry = cards[ran].country;
@@ -35,6 +36,7 @@ function createRandomFlags(num){
             countries.push(selectedCountry);
         }
         console.log(countries);
+        console.log(chosenNumbers);
     }
 }
 //HAY QUE HACER QUE EL VALOR NUM LLEGUE A TODAS LAS VARIABLES Y SE ACTUALICE
@@ -80,7 +82,7 @@ function generateMatrix(num){
 
         $("#table").append("<div>"+generateCol(i, num, positionFlag)+"</div>");
     }
-
+    countries=[];
  }
 
  function generateCol(row, num, pos){
