@@ -22,7 +22,7 @@ function loadGame(){
     for(var p=0; p<totalFlags; p++){
         chosenNumbers.push(p);
     }
-    random();
+    //Random() devuelve el último número de ese array desordenado. Luego lo elimina con .pop()
     var num = parseInt(document.getElementById("difficulty").value);
     generateMatrix(num);
     createTable(num);
@@ -41,8 +41,10 @@ function createRandomFlags(num){
         var ran = random();
         console.info(ran);
         var selectedCountry = cards[ran].country;
+        //positions[k].name = cards[ran].name;
         for(var l=0; l<2; l++){
             countries.push(selectedCountry);
+
         }
         console.log(countries);
         console.log(chosenNumbers);
@@ -51,8 +53,7 @@ function createRandomFlags(num){
         chosenNumbers.push(p);
     }
 }
-//HAY QUE HACER QUE EL VALOR NUM LLEGUE A TODAS LAS VARIABLES Y SE ACTUALICE
-//select onClick generateMatrix();
+
 function generateMatrix(num){
     table=[];
 
@@ -77,9 +78,6 @@ function generateMatrix(num){
     $("#prueba").append(JSON.stringify(positions));
 }
 
-
- //Esta función crea un array con números ordenado de 0 a 18 (cantidad total de banderas) y luego los desordena (SÓLO LA PRIMERA VEZ QUE SE LLAMA, es por eso que está la variable executed). Random() devuelve el último número de ese array desordenado. Luego lo elimina con .pop()
-
  function createTable(){
     var num = parseInt(document.getElementById("difficulty").value);
     $("#table").empty();
@@ -90,7 +88,7 @@ function generateMatrix(num){
     }
  }
 
- function generateCol(row, num, pos){
+ function generateCol(row, num){
     var col="";
     
     for(var j=0; j<num; j++){
