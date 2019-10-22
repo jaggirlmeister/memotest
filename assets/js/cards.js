@@ -88,5 +88,5 @@ var cards=[
         "name": "Turquia",
         "country": "TUR",
         "call" : "0",
-    },
+    }
 ];

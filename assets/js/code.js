@@ -15,21 +15,27 @@ var positionFlag;
 
 var cont=0;
 
-for(var p=0; p<totalFlags; p++){
-    chosenNumbers.push(p);
-}
-
 function loadGame(){
     var num = parseInt(document.getElementById("difficulty").value);
     generateMatrix(num);
     createTable(num);
  }
 
+ for(var p=0; p<totalFlags; p++){
+    chosenNumbers.push(p);
+}
+function random(){
+    shuffle(chosenNumbers);
+    var last = chosenNumbers.pop();
+    return last;
+ }
+
+
 //meter todo esto en una función para poder vaciar el array
 function createRandomFlags(num){
     
     for(var k=0; k<Math.floor(num*num)/2; k++){
-        var ran = chosenNumbers[k];
+        var ran = random();
         console.info(ran);
         var selectedCountry = cards[ran].country;
         for(var l=0; l<2; l++){
@@ -68,12 +74,6 @@ function generateMatrix(num){
 
  //Esta función crea un array con números ordenado de 0 a 18 (cantidad total de banderas) y luego los desordena (SÓLO LA PRIMERA VEZ QUE SE LLAMA, es por eso que está la variable executed). Random() devuelve el último número de ese array desordenado. Luego lo elimina con .pop()
 
- /*function random(){
-    shuffle(chosenNumbers);
-    var last = chosenNumbers.pop();
-    return last;
- }*/
-
  function createTable(){
     var num = parseInt(document.getElementById("difficulty").value);
     $("#table").empty();
@@ -97,9 +97,14 @@ function generateMatrix(num){
     return col;
  }
 
+//Esta función es para cambiar los motivos y la vamos a usar al final
+ function changeMotive(){
+    var motive = parseInt(document.getElementById("motive").value);
+    $("td").attr("", "blue");
+ }
 
-//Funcion para mezclar
- var shuffle = function (array) {
+ //Funcion para mezclar
+var shuffle = function (array) {
 
 	var currentIndex = array.length;
 	var temporaryValue, randomIndex;
@@ -118,10 +123,4 @@ function generateMatrix(num){
     console.info(positions);
     return array;
     
- }
-
-//Esta función es para cambiar los motivos y la vamos a usar al final
- function changeMotive(){
-    var motive = parseInt(document.getElementById("motive").value);
-    $("td").attr("", "blue");
  }
