@@ -16,20 +16,21 @@ var positionFlag;
 var cont=0;
 
 function loadGame(){
+    for(var p=0; p<totalFlags; p++){
+        chosenNumbers.push(p);
+    }
+    countries=[];
+    positions=[];
     var num = parseInt(document.getElementById("difficulty").value);
     generateMatrix(num);
     createTable(num);
  }
 
- for(var p=0; p<totalFlags; p++){
-    chosenNumbers.push(p);
-}
 function random(){
     shuffle(chosenNumbers);
     var last = chosenNumbers.pop();
     return last;
  }
-
 
 //meter todo esto en una función para poder vaciar el array
 function createRandomFlags(num){
@@ -43,6 +44,9 @@ function createRandomFlags(num){
         }
         console.log(countries);
         console.log(chosenNumbers);
+    }
+    for(var p=0; p<totalFlags; p++){
+        chosenNumbers.push(p);
     }
 }
 //HAY QUE HACER QUE EL VALOR NUM LLEGUE A TODAS LAS VARIABLES Y SE ACTUALICE
@@ -82,14 +86,12 @@ function generateMatrix(num){
 
         $("#table").append("<div>"+generateCol(i, num, positionFlag)+"</div>");
     }
-    countries=[];
  }
 
  function generateCol(row, num, pos){
     var col="";
     
     for(var j=0; j<num; j++){
-        console.log(positions);
         var actualFlag = positions[cont].flag;
         col+="<div class='flip-card'><div class='flip-card-inner'><div id='"+row+j+"' class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img>"+actualFlag+"</div><div class='flip-card-back'></div></div></div>";
         cont++;
@@ -120,7 +122,6 @@ var shuffle = function (array) {
 		array[currentIndex] = array[randomIndex];
 		array[randomIndex] = temporaryValue;
 	}
-    console.info(positions);
     return array;
     
  }
