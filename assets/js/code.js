@@ -93,7 +93,7 @@ function generateMatrix(num){
     
     for(var j=0; j<num; j++){
         var actualFlag = positions[cont].flag;
-        col+="<div class='flip-card'><div class='flip-card-inner'><div id='"+row+j+"' class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img>"+actualFlag+"</div><div class='flip-card-back'></div></div></div>";
+        col+="<div class='flip-card'><div class='flip-card-inner'><div id='"+row+j+"' class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
         cont++;
     }
     return col;
