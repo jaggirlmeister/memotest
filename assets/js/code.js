@@ -2,7 +2,6 @@ var table =[];
 var positions=[];
 //propiedades de position: row: i, col: j, country: XXX
 var num = parseInt(document.getElementById("difficulty").value);
-
 var chosenNumbers = [];
 var copyChosenNumbers=[];
 var executed = false;
@@ -16,11 +15,14 @@ var positionFlag;
 var cont=0;
 
 function loadGame(){
+    chosenNumbers = [];
+    countries=[];
+    positions=[];
+    cont=0;
     for(var p=0; p<totalFlags; p++){
         chosenNumbers.push(p);
     }
-    countries=[];
-    positions=[];
+    random();
     var num = parseInt(document.getElementById("difficulty").value);
     generateMatrix(num);
     createTable(num);
