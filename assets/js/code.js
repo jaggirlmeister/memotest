@@ -19,6 +19,8 @@ var first=0;
 var firstCountry="";
 var secondCountry="";
 
+var canClick = true;
+
 function loadGame(){
     chosenNumbers = [];
     countries=[];
@@ -105,31 +107,45 @@ function generateMatrix(num){
  }
 
 function swap(a, b){
+    if(canClick && a!=first){ 
 
-    if(pair==0){
-        first=a;
-        firstCountry=b;
-        $("#"+first).removeClass("rotateBack");
-        $("#"+first).addClass("rotate");
-        pair ++;
-    }
-    else if(pair==1){
-        second=a;
-        secondCountry=b;
-        $("#"+second).removeClass("rotateBack");
-        $("#"+second).addClass("rotate");
-        
-        pair=0;
-        if(firstCountry!==secondCountry){
-            setTimeout(swapBack, 1000);
+        if(pair==0){
+            first=a;
+            firstCountry=b;
+            $("#"+first).removeClass("rotateBack");
+            $("#"+first).addClass("rotate");
+            pair ++;
+        }
 
+        else if(pair==1){
+            second=a;
+            secondCountry=b;
+            $("#"+second).removeClass("rotateBack");
+            $("#"+second).addClass("rotate");
+            pair=0;
+            if(firstCountry!==secondCountry){
+            canClick = false;
+                setTimeout(swapBack, 1000);
+
+            }
+            else{
+                //Esto no funciona :(
+                document.getElementById(first).onclick= null;
+                document.getElementById(second).onclick= null;
+               //$("#"+first).removeAttr("onclick");
+               //$("#"+second).removeAttr("onclick");
+            }
         }
     }
 }
 
 function swapBack(){
+
     $("#"+first).removeClass("rotate").addClass("rotateBack");
     $("#"+second).removeClass("rotate").addClass("rotateBack");
+
+    canClick = true;
+
 }
 
 
