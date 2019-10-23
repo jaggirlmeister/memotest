@@ -6,6 +6,11 @@ var chosenNumbers = [];
 var copyChosenNumbers=[];
 var executed = false;
 
+var playerOnePoints=0;//futuras variable
+var playerTwoPoints=0;
+
+var turno= true; //turno jugadores
+
 var countries=[];
 var shuffledCountries=[];
 
