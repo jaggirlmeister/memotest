@@ -109,25 +109,27 @@ function swap(a, b){
     if(pair==0){
         first=a;
         firstCountry=b;
+        $("#"+first).removeClass("rotateBack");
         $("#"+first).addClass("rotate");
         pair ++;
     }
     else if(pair==1){
         second=a;
         secondCountry=b;
+        $("#"+second).removeClass("rotateBack");
         $("#"+second).addClass("rotate");
         
+        pair=0;
         if(firstCountry!==secondCountry){
-            setTimeout(swapBack, 1000)
+            setTimeout(swapBack, 1000);
 
         }
-        pair=0;
     }
 }
 
 function swapBack(){
-    $("#"+first).addClass("rotateBack");
-    $("#"+second).addClass("rotateBack");
+    $("#"+first).removeClass("rotate").addClass("rotateBack");
+    $("#"+second).removeClass("rotate").addClass("rotateBack");
 }
 
 
