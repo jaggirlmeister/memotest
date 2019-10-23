@@ -105,10 +105,10 @@ function generateMatrix(num){
  }
 
 function swap(a, b){
-    first=a;
-    firstCountry=b;
 
     if(pair==0){
+        first=a;
+        firstCountry=b;
         $("#"+first).addClass("rotate");
         pair ++;
     }
@@ -116,37 +116,20 @@ function swap(a, b){
         second=a;
         secondCountry=b;
         $("#"+second).addClass("rotate");
-        pair=0;
         
         if(firstCountry!==secondCountry){
-            $("#"+first).attr("rotate","rotateBack");
-            $("#"+second).attr("rotate","rotateBack");
+            setTimeout(swapBack, 1000)
+
         }
+        pair=0;
     }
 }
 
-function swapCard(a){
-    if(pair==0){
-        $("#"+a).addClass("rotate");
-        pair ++;
-        first[0]=a;
-        first[1]=Number((a+"").substring(0,1))-1;
-        first[2]=Number((a+"").substring(1,0))-1;
-        first[3] = first[0]+""+first[1]+"";
-    }
-    else if(pair==1){
-        second[0]=Number((a+"").substring(0,1))-1;
-        second[1]=Number((a+"").substring(1,0))-1;
-        second[2] = second[0]+""+second[1]+"";
-        $("#"+a).addClass("rotate");
-        pair=0;
-        if(positions[first[2]].flag!=positions[second[2].flag]){
-            $("#"+a).removeClass("rotate");
-            $("#"+first[0]).removeClass("rotate");
-            first = [];
-        }
-    }
+function swapBack(){
+    $("#"+first).addClass("rotateBack");
+    $("#"+second).addClass("rotateBack");
 }
+
 
 //Esta función es para cambiar los motivos y la vamos a usar al final
  function changeMotive(){
