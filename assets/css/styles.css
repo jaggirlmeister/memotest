@@ -104,17 +104,22 @@ option{
 .flip-card-front {
     background-color:white;
     color: black;
+    transform: rotateY(180deg);
   }
   
   .flip-card-back {
     background-color: indigo;
     color: white;
+    transform: rotateY(0deg);
+  }
+
+.rotate {
     transform: rotateY(180deg);
   }
 
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
+.rotateBack{
+    transform: rotateY(0deg);
+}
 
 img{
     border-radius: 1.1em;

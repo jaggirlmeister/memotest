@@ -13,6 +13,11 @@ var totalFlags=18;
 var positionFlag;
 
 var cont=0;
+var pair=0;
+var second=0;
+var first=0;
+var firstCountry="";
+var secondCountry="";
 
 function loadGame(){
     chosenNumbers = [];
@@ -93,11 +98,55 @@ function generateMatrix(num){
     
     for(var j=0; j<num; j++){
         var actualFlag = positions[cont].flag;
-        col+="<div class='flip-card'><div class='flip-card-inner'><div id='"+row+j+"' class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
+        col+="<div class='flip-card' onclick='swap("+(row+1)+(j+1)+",\""+actualFlag+"\")'><div id='"+(row+1)+(j+1)+"' class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
         cont++;
     }
     return col;
  }
+
+function swap(a, b){
+    first=a;
+    firstCountry=b;
+
+    if(pair==0){
+        $("#"+first).addClass("rotate");
+        pair ++;
+    }
+    else if(pair==1){
+        second=a;
+        secondCountry=b;
+        $("#"+second).addClass("rotate");
+        pair=0;
+        
+        if(firstCountry!==secondCountry){
+            $("#"+first).attr("rotate","rotateBack");
+            $("#"+second).attr("rotate","rotateBack");
+        }
+    }
+}
+
+function swapCard(a){
+    if(pair==0){
+        $("#"+a).addClass("rotate");
+        pair ++;
+        first[0]=a;
+        first[1]=Number((a+"").substring(0,1))-1;
+        first[2]=Number((a+"").substring(1,0))-1;
+        first[3] = first[0]+""+first[1]+"";
+    }
+    else if(pair==1){
+        second[0]=Number((a+"").substring(0,1))-1;
+        second[1]=Number((a+"").substring(1,0))-1;
+        second[2] = second[0]+""+second[1]+"";
+        $("#"+a).addClass("rotate");
+        pair=0;
+        if(positions[first[2]].flag!=positions[second[2].flag]){
+            $("#"+a).removeClass("rotate");
+            $("#"+first[0]).removeClass("rotate");
+            first = [];
+        }
+    }
+}
 
 //Esta función es para cambiar los motivos y la vamos a usar al final
  function changeMotive(){
@@ -125,3 +174,14 @@ var shuffle = function (array) {
     return array;
     
  }
+
+
+
+
+
+
+
+
+
+
+ 
