@@ -2,9 +2,6 @@ var table =[];
 var positions=[];
 //propiedades de position: row: i, col: j, country: XXX
 var num = parseInt(document.getElementById("difficulty").value);
-var chosenNumbers = [];
-var copyChosenNumbers=[];
-var executed = false;
 
 var playerOnePoints=0;//futuras variable
 var playerTwoPoints=0;
@@ -12,7 +9,6 @@ var playerTwoPoints=0;
 var turno= true; //turno jugadores
 
 var countries=[];
-var shuffledCountries=[];
 
 var totalFlags=18;
 var positionFlag;
@@ -128,15 +124,8 @@ function swap(a, b){
 
             }
             else{
-                //Esto no funciona :(
-                    //$( "li.item-a" ).parent().css( "background-color", "red" );
-                    //$("#"+first).parent().css( "background-color", "red" );
                     $("#"+first).parent().addClass("disable");
                     $("#"+second).parent().addClass("disable");
-                //document.getElementById(first).disable= true;
-                //document.getElementById(second).disable= true;
-               //$("#"+first).removeAttr("onclick");
-               //$("#"+second).removeAttr("onclick");
             }
         }
     }
