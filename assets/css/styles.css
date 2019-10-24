@@ -124,3 +124,7 @@ option{
 img{
     border-radius: 1.1em;
 }
+
+.disable{
+    pointer-events:none;
+}

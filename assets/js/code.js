@@ -51,15 +51,12 @@ function createRandomFlags(num){
     
     for(var k=0; k<Math.floor(num*num)/2; k++){
         var ran = random();
-        console.info(ran);
         var selectedCountry = cards[ran].country;
         //positions[k].name = cards[ran].name;
         for(var l=0; l<2; l++){
             countries.push(selectedCountry);
 
         }
-        console.log(countries);
-        console.log(chosenNumbers);
     }
     for(var p=0; p<totalFlags; p++){
         chosenNumbers.push(p);
@@ -84,10 +81,7 @@ function generateMatrix(num){
     for(var n=0; n<num*num; n++){
         positions[n].flag = countries[n];
     }
-    console.log(positions);
-    //("#prueba").append(JSON.stringify(positions));
     shuffle(positions);
-    //$("#prueba").append(JSON.stringify(positions)); por las dudas lo dejo*/
 }
 
  function createTable(){
@@ -135,8 +129,12 @@ function swap(a, b){
             }
             else{
                 //Esto no funciona :(
-                document.getElementById(first).onclick= null;
-                document.getElementById(second).onclick= null;
+                    //$( "li.item-a" ).parent().css( "background-color", "red" );
+                    //$("#"+first).parent().css( "background-color", "red" );
+                    $("#"+first).parent().addClass("disable");
+                    $("#"+second).parent().addClass("disable");
+                //document.getElementById(first).disable= true;
+                //document.getElementById(second).disable= true;
                //$("#"+first).removeAttr("onclick");
                //$("#"+second).removeAttr("onclick");
             }
