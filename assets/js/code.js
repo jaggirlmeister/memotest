@@ -5,6 +5,7 @@ var num = parseInt(document.getElementById("difficulty").value);
 
 var playerOnePoints=0;//futuras variable
 var playerTwoPoints=0;
+var turn=0;
 
 var turno= true; //turno jugadores
 
@@ -126,6 +127,18 @@ function swap(a, b){
             else{
                     $("#"+first).parent().addClass("disable");
                     $("#"+second).parent().addClass("disable");
+                    if(turn==0){
+                        playerOnePoints=playerOnePoints+5;
+                        $("#player2Points").addClass("");
+                        $("#player1Points").empty();
+                        $("#player1Points").append(playerOnePoints);
+                        turn=1;
+                    }else{
+                        playerTwoPoints=playerTwoPoints+5;
+                        $("#player2Points").empty();
+                        $("#player2Points").append(playerTwoPoints);
+                        turn=0;
+                    }
             }
         }
     }
@@ -167,14 +180,3 @@ var shuffle = function (array) {
     return array;
     
  }
-
-
-
-
-
-
-
-
-
-
- 

@@ -128,3 +128,7 @@ img{
 .disable{
     pointer-events:none;
 }
+
+.playerPoints{
+    display: inline-block;
+}
