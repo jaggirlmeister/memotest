@@ -108,6 +108,10 @@ option{
     transform: rotateY(0deg);
   }
 
+.flip-card-back:hover{ 
+    opacity: 0.8;
+}
+
 .rotate {
     transform: rotateY(180deg);
   }
