@@ -7,8 +7,10 @@ h1{
 }
 
 body{
-    background-image: url("../images/antartica.jpeg");
+    background-image: url("../images/afternoon.jpg");
     background-repeat: repeat;
+    background-size: cover;
+    /*background-size: 20%;*/
 }
 #cont{
     margin: 0 auto;
@@ -167,8 +169,25 @@ img{
     background-color: #dbaaff;
 }
 
-.active{
-    color: indigo;
+.specialTile{
+    -moz-border-radius: 50px/50px;
+    -webkit-border-radius: 2px 2px;
+    -webkit-animation-name: specialTile;
+    -webkit-animation: specialTile 1s ease-in-out infinite alternate;
+    -moz-animation: specialTile 1s ease-in-out infinite alternate;
+    animation: specialTile 1.5s ease-in-out infinite alternate;
+    /*box-shadow: 0 0px 17px 0 rgb(156, 157, 49);*/
+}
+
+@-webkit-keyframes specialTile {
+
+    from {
+        -webkit-box-shadow: 0 0 6px #fff, 0 0 5px #fff, 0 0 6px #afac29, 0 0 7px #afac29, 0 0 8px #afac29, 0 0 9px #afac29, 0 0 10px #afac29;
+      }
+      
+      to {
+        -webkit-box-shadow:  0 0 12px #fff, 0 0 17px #a9951b, 0 0 31px #a9951b, 0 0 11px #a9951b, 0 0 21px #a9951b, 0 0 21px #a9951b, 0 0 14px #a9951b;
+      }
 }
 
 .glow {

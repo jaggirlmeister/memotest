@@ -19,6 +19,8 @@ var secondCountry="";
 var pairsFound=0;
 var pairsAmount=0;
 var canClick = true;
+var tileValue=0;
+var lastFlag="";
 
 function loadGame(){
 
@@ -28,9 +30,18 @@ function loadGame(){
     positions=[];
     cont=0;
     pairsFound=0;
+    tileValue=0;
 
     //Vuelvo a pedir el valor de num (tamaño de la tabla: 4, 5 o 6)
     var num = parseInt(document.getElementById("difficulty").value);
+    if(num==4){
+        tileValue=5;
+    }else if(num==5){
+        tileValue=10;
+    }else{
+        tileValue=15;
+    }
+
 
     //Calculo la cantidad de pares que voy a tener
     pairsAmount=(num*num)/2
@@ -68,6 +79,10 @@ function generateMatrix(num){
     for(var n=0; n<num*num; n++){
         positions[n].flag = countries[n];//Asignamos en la posición [n] de positions (el array que le faltaba el valor flag) el valor de flag que obtuvimos en la otra función
     }
+    if(num==5){
+        lastFlag=countries[24];
+        console.info(lastFlag);
+    }
     shuffle(positions); //bien, hasta acá el array estaba ordenado. Ahora simplemente pasamos el array a esa función y ya se desordena. TERMINAMOS LA MATRIZ.
 }
 
@@ -97,6 +112,8 @@ function createTable(num){
         //creo la cantidad de "divs filas" que necesito y con la función generateCol() le anexo los "divs columnas"
         $("#table").append("<div>"+generateCol(i, num)+"</div>");
     }
+
+    //if tabla es 5. Entonces obtener el id de la ficha diferente y cambiar el onclick.
 }
 
 function generateCol(row, num){
@@ -104,26 +121,35 @@ function generateCol(row, num){
     //los divs columnas que voy a crear tienen: sus id's sacados del numero de los for (i)(j); llaman a la función onclick "swap" que pasa como parámetro su ID; y dentro de cada div hay un tag img con la bandera que necesitamos (que pedimos del objeto "flags", el otro archivo .js). Y LISTO, YA ESTÁ LA TABLA.
     for(var j=0; j<num; j++){
         var actualFlag = positions[cont].flag;
-        col+="<div class='flip-card' onclick='swap("+(row+1)+(j+1)+",\""+actualFlag+"\")'><div id='"+(row+1)+(j+1)+"' class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
-        cont++;
+
+        //Pregunto si el tablero es de 5 para poder darle una función diferente a la ficha especial
+        if(num==5 && actualFlag==lastFlag){
+            col+="<div class='flip-card' onclick='specialTile("+(row+1)+(j+1)+")'><div id='"+(row+1)+(j+1)+"' class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
+            cont++;
+        }
+        else{ 
+            col+="<div class='flip-card' onclick='swap("+(row+1)+(j+1)+",\""+actualFlag+"\")'><div id='"+(row+1)+(j+1)+"' class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
+            cont++;
+        }
     }
     return col;
 }
 
 //JUGABILIDAD
-function swap(a, b){
-    if(canClick && a!=first){ 
+
+function swap(position, flag){
+    if(canClick && position!=first){ 
 
         if(pair==0){
-            first=a;
-            firstCountry=b;
+            first=position;
+            firstCountry=flag;
             $("#"+first).removeClass("rotateBack");
             $("#"+first).addClass("rotate");
             pair ++;
         }
         else if(pair==1){
-            second=a;
-            secondCountry=b;
+            second=position;
+            secondCountry=flag;
             $("#"+second).removeClass("rotateBack");
             $("#"+second).addClass("rotate");
             pair=0;
@@ -153,13 +179,13 @@ function swap(a, b){
 
                 //si el turno es del jugador 1...
                 if(turn==0){
-                    playerOnePoints=playerOnePoints+5;
+                    playerOnePoints=playerOnePoints+tileValue;
                     $("#player1Points").empty();
                     $("#player1Points").append(playerOnePoints);
                 }
                 //si el turno es del jugador 2...
                 else{
-                    playerTwoPoints=playerTwoPoints+5;
+                    playerTwoPoints=playerTwoPoints+tileValue;
                     $("#player2Points").empty();
                     $("#player2Points").append(playerTwoPoints);
                 }
@@ -169,17 +195,17 @@ function swap(a, b){
                     //Ganó el jugador 1
                     if(playerOnePoints>playerTwoPoints){
                         setTimeout(winSwap, 1000);
-                        $("#table").append("<div id='announce'><p>¡Ganó el jugador 1!</p><button onclick='loadGame()'>Jugar de nuevo</button></div>");
+                        $("#table").append("<div id='announce'><p>¡Ganó el jugador 1!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
                     }
                     //Ganó el jugador 2
                     else if(playerOnePoints<playerTwoPoints){
                         setTimeout(winSwap, 1000);
-                        $("#table").append("<div id='announce'><p>¡Ganó el jugador 2!</p><button onclick='loadGame()'>Jugar de nuevo</button></div>");
+                        $("#table").append("<div id='announce'><p>¡Ganó el jugador 2!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
                     }
                     //Empate!
                     else{
                         setTimeout(winSwap, 1000);
-                        $("#table").append("<div id='announce'><p>¡Empate!</p><button onclick='loadGame()'>Jugar de nuevo</button></div>");
+                        $("#table").append("<div id='announce'><p>¡Empate!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
                     }     
                 }
             }
@@ -194,16 +220,53 @@ function swapBack(){
     canClick = true;
 }
 
+//Función para la ficha especial. Se suman 50 puntos al jugador que la encuentra.
+function specialTile(position){
+    
+        var specialTileValue=50;
+        $("#"+position).addClass("rotate");
+        $("#"+position).addClass("specialTile");
+        $("#"+position).parent().addClass("disable");
+        if(turn==0){ 
+            playerOnePoints=playerTwoPoints+specialTileValue;
+            $("#player1Points").empty();
+            $("#player1Points").append(playerOnePoints);
+        }
+        else{
+            playerTwoPoints=playerTwoPoints+specialTileValue;
+            $("#player2Points").empty();
+            $("#player2Points").append(playerTwoPoints);
+        }
+        lastFlag="";
+    }
+
 //giro de las fichas al ganar
 function winSwap(){
     $(".flip-card-inner").removeClass("rotate");
     $(".flip-card-inner").addClass("rotateWin");
 }
 
+function resetGame(){
+    playerOnePoints=0;
+    $("#player1Points").empty();
+    $("#player1Points").append(playerOnePoints);
+    playerTwoPoints=0;
+    $("#player2Points").empty();
+    $("#player2Points").append(playerTwoPoints);
+
+    loadGame();
+}
+
+function sureAbout(){
+    $("#announce").empty();
+    $("#announce").append("<p>¿Está seguro? Si reinicia la partida perderá sus puntos</p><button onclick='loadGame()'>No</button><button onclick='resetGame()'>Sí</button>");
+}
+
 //Esta función es para cambiar los motivos y la vamos a usar al final
 function changeMotive(){
-    var motive = parseInt(document.getElementById("motive").value);
-    $("td").attr("", "blue");
+    var motive = document.getElementById("motive").value;
+
+    $("body").css("background-image","url('assets/images/"+motive+".jpg'");
 }
 
  //Funcion para mezclar. (Nos la pasó Fabián de internet)
