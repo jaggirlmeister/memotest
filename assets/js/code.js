@@ -44,7 +44,7 @@ function loadGame(){
 
 
     //Calculo la cantidad de pares que voy a tener
-    pairsAmount=(num*num)/2
+    pairsAmount=Math.floor((num*num)/2);
 
     //Creo un array con números de 0 a 17(total de banderas)
     for(var p=0; p<totalFlags; p++){
