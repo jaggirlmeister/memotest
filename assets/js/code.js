@@ -202,7 +202,7 @@ function swap(position, flag){
                 if(pairsFound==pairsAmount){
                     //Ganó el jugador 1
                     if(actualPlayerOnePoints>actualPlayerTwoPoints){
-                        setTimeout(winSwap, 1000);
+                        setTimeout(winSwap, 500);
                         $("#table").append("<div id='announce'><p>¡Ganó el jugador 1!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
 
                         actualPlayerOnePoints=0;
@@ -210,7 +210,7 @@ function swap(position, flag){
                     }
                     //Ganó el jugador 2
                     else if(playerOnePoints<playerTwoPoints){
-                        setTimeout(winSwap, 1000);
+                        setTimeout(winSwap, 500);
                         $("#table").append("<div id='announce'><p>¡Ganó el jugador 2!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
 
                         actualPlayerOnePoints=0;
@@ -218,7 +218,7 @@ function swap(position, flag){
                     }
                     //Empate!
                     else{
-                        setTimeout(winSwap, 1000);
+                        setTimeout(winSwap, 500);
                         $("#table").append("<div id='announce'><p>¡Empate!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
 
                         actualPlayerOnePoints=0;
