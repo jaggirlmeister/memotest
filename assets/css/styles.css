@@ -139,6 +139,11 @@ img{
     display: inline-block;
 }
 
+.playerPoints p{
+    margin-top: 0;
+    margin-bottom: 0.2em;
+}
+
 #announce{
     position: absolute;
     width: 100%;

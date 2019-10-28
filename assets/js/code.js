@@ -10,6 +10,8 @@ var cont=0;
 //Jugabilidad
 var playerOnePoints=0;
 var playerTwoPoints=0;
+var actualPlayerOnePoints=0;
+var actualPlayerTwoPoints=0;
 var turn=0;
 var pair=0;
 var second=0;
@@ -22,6 +24,10 @@ var canClick = true;
 var tileValue=0;
 var lastFlag="";
 
+/*Esto es para agregarles nombres a los jugadores
+var player1=prompt("Ingrese nombre del primer jugador");
+var player2=prompt("Ingrese nombre del jugador 2");*/
+
 function loadGame(){
 
     //Reinicio todos los valores
@@ -31,6 +37,10 @@ function loadGame(){
     cont=0;
     pairsFound=0;
     tileValue=0;
+    $("#player1Points").empty();
+    $("#player1Points").append(actualPlayerOnePoints);
+    $("#player2Points").empty();
+    $("#player2Points").append(actualPlayerTwoPoints);
 
     //Vuelvo a pedir el valor de num (tamaño de la tabla: 4, 5 o 6)
     var num = parseInt(document.getElementById("difficulty").value);
@@ -106,8 +116,11 @@ function random(){
 }
 
 function createTable(num){
-    $("#table").empty(); //vacío el tablero
+    /*Esto es para agregarles nombre a los jugadores
+    $("#pointsPl1").html(player1);
+    $("#pointsPl2").html(player2);*/
 
+    $("#table").empty(); //vacío el tablero
     for(var i=0; i<num; i++){
         //creo la cantidad de "divs filas" que necesito y con la función generateCol() le anexo los "divs columnas"
         $("#table").append("<div>"+generateCol(i, num)+"</div>");
@@ -138,6 +151,7 @@ function generateCol(row, num){
 //JUGABILIDAD
 
 function swap(position, flag){
+    
     if(canClick && position!=first){ 
 
         if(pair==0){
@@ -158,18 +172,6 @@ function swap(position, flag){
             if(firstCountry!==secondCountry){
                 canClick = false;
                 setTimeout(swapBack, 1000);
-
-                //cambio el turno del jugador
-                if(turn==0){
-                    turn=1;
-                    $("#pointsPl2").addClass("glow");
-                    $("#pointsPl1").removeClass("glow");
-                }
-                else{
-                    turn=0;
-                    $("#pointsPl1").addClass("glow");
-                    $("#pointsPl2").removeClass("glow");
-                }
             }
             //si son par..
             else{
@@ -179,33 +181,48 @@ function swap(position, flag){
 
                 //si el turno es del jugador 1...
                 if(turn==0){
+                    actualPlayerOnePoints=actualPlayerOnePoints+tileValue;
                     playerOnePoints=playerOnePoints+tileValue;
                     $("#player1Points").empty();
-                    $("#player1Points").append(playerOnePoints);
+                    $("#player1Points").append(actualPlayerOnePoints);
+                    $("#player1TotalPoints").empty();
+                    $("#player1TotalPoints").append(playerOnePoints);
                 }
                 //si el turno es del jugador 2...
                 else{
+                    actualPlayerTwoPoints=actualPlayerTwoPoints+tileValue;
                     playerTwoPoints=playerTwoPoints+tileValue;
                     $("#player2Points").empty();
-                    $("#player2Points").append(playerTwoPoints);
+                    $("#player2Points").append(actualPlayerTwoPoints);
+                    $("#player2TotalPoints").empty();
+                    $("#player2TotalPoints").append(playerTwoPoints);
                 }
                 pairsFound++;
 
                 if(pairsFound==pairsAmount){
                     //Ganó el jugador 1
-                    if(playerOnePoints>playerTwoPoints){
+                    if(actualPlayerOnePoints>actualPlayerTwoPoints){
                         setTimeout(winSwap, 1000);
                         $("#table").append("<div id='announce'><p>¡Ganó el jugador 1!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
+
+                        actualPlayerOnePoints=0;
+                        actualPlayerTwoPoints=0;
                     }
                     //Ganó el jugador 2
                     else if(playerOnePoints<playerTwoPoints){
                         setTimeout(winSwap, 1000);
                         $("#table").append("<div id='announce'><p>¡Ganó el jugador 2!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
+
+                        actualPlayerOnePoints=0;
+                        actualPlayerTwoPoints=0;
                     }
                     //Empate!
                     else{
                         setTimeout(winSwap, 1000);
                         $("#table").append("<div id='announce'><p>¡Empate!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
+
+                        actualPlayerOnePoints=0;
+                        actualPlayerTwoPoints=0;
                     }     
                 }
             }
@@ -217,6 +234,18 @@ function swap(position, flag){
 function swapBack(){
     $("#"+first).removeClass("rotate").addClass("rotateBack");
     $("#"+second).removeClass("rotate").addClass("rotateBack");
+
+    //cambio el turno del jugador y el indicador
+    if(turn==0){
+        turn=1;
+        $("#pointsPl2").addClass("glow");
+        $("#pointsPl1").removeClass("glow");
+    }
+    else{
+        turn=0;
+        $("#pointsPl1").addClass("glow");
+        $("#pointsPl2").removeClass("glow");
+    }
     canClick = true;
 }
 
@@ -248,11 +277,18 @@ function winSwap(){
 
 function resetGame(){
     playerOnePoints=0;
+    playerTwoPoints=0;
+    totalPlayer2Points=0;
+    totalPlayer1Points=0;
     $("#player1Points").empty();
     $("#player1Points").append(playerOnePoints);
-    playerTwoPoints=0;
     $("#player2Points").empty();
     $("#player2Points").append(playerTwoPoints);
+
+    $("#player1TotalPoints").empty();
+    $("#player1TotalPoints").append(playerOnePoints);
+    $("#player2TotalPoints").empty();
+    $("#player2TotalPoints").append(playerTwoPoints);
 
     loadGame();
 }
