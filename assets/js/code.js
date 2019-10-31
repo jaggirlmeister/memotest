@@ -52,7 +52,6 @@ function loadGame(){
         tileValue=15;
     }
 
-
     //Calculo la cantidad de pares que voy a tener
     pairsAmount=Math.floor((num*num)/2);
 
@@ -121,6 +120,7 @@ function createTable(num){
     $("#pointsPl2").html(player2);*/
 
     $("#table").empty(); //vacío el tablero
+
     for(var i=0; i<num; i++){
         //creo la cantidad de "divs filas" que necesito y con la función generateCol() le anexo los "divs columnas"
         $("#table").append("<div>"+generateCol(i, num)+"</div>");
@@ -209,7 +209,7 @@ function swap(position, flag){
                         actualPlayerTwoPoints=0;
                     }
                     //Ganó el jugador 2
-                    else if(playerOnePoints<playerTwoPoints){
+                    else if(actualPlayerOnePoints<actualPlayerTwoPoints){
                         setTimeout(winSwap, 500);
                         $("#table").append("<div id='announce'><p>¡Ganó el jugador 2!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
 
@@ -304,6 +304,7 @@ function changeMotive(){
 
     $("body").css("background-image","url('assets/images/"+motive+".jpg'");
 }
+
 
  //Funcion para mezclar. (Nos la pasó Fabián de internet)
 var shuffle = function (array) {
