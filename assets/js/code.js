@@ -28,6 +28,11 @@ var lastFlag="";
 var player1=prompt("Ingrese nombre del primer jugador");
 var player2=prompt("Ingrese nombre del jugador 2");*/
 
+/*Así podemos guardar en localStorage y llamarlos. Pero no lo estamos usando.
+localStorage.setItem('tile', tileValue);
+localStorage.getItem('tile');
+*/
+
 function loadGame(){
 
     //Reinicio todos los valores
@@ -153,7 +158,6 @@ function generateCol(row, num){
 function swap(position, flag){
     
     if(canClick && position!=first){ 
-
         if(pair==0){
             first=position;
             firstCountry=flag;
