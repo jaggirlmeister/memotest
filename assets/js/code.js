@@ -136,7 +136,7 @@ function createTable(num){
 
 function generateCol(row, num){
     var col="";
-    //los divs columnas que voy a crear tienen: sus id's sacados del numero de los for (i)(j); llaman a la función onclick "swap" que pasa como parámetro su ID; y dentro de cada div hay un tag img con la bandera que necesitamos (que pedimos del objeto "flags", el otro archivo .js). Y LISTO, YA ESTÁ LA TABLA.
+    //los divs columnas que voy a crear tienen: sus id's sacados del numero de los for (i)(j); llaman a la función onclick "flip" que pasa como parámetro su ID; y dentro de cada div hay un tag img con la bandera que necesitamos (que pedimos del objeto "flags", el otro archivo .js). Y LISTO, YA ESTÁ LA TABLA.
     for(var j=0; j<num; j++){
         var actualFlag = positions[cont].flag;
 
@@ -146,7 +146,7 @@ function generateCol(row, num){
             cont++;
         }
         else{ 
-            col+="<div class='flip-card' onclick='swap("+(row+1)+(j+1)+",\""+actualFlag+"\")'><div id='"+(row+1)+(j+1)+"' class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
+            col+="<div class='flip-card' onclick='flip("+(row+1)+(j+1)+",\""+actualFlag+"\")'><div id='"+(row+1)+(j+1)+"' class='flip-card-inner'><div class='flip-card-front'><img width='70' src='"+flags[actualFlag]+"'></img></div><div class='flip-card-back'></div></div></div>";
             cont++;
         }
     }
@@ -155,7 +155,7 @@ function generateCol(row, num){
 
 //JUGABILIDAD
 
-function swap(position, flag){
+function flip(position, flag){
     
     if(canClick && position!=first){ 
         if(pair==0){
@@ -175,7 +175,7 @@ function swap(position, flag){
             //si no son par..
             if(firstCountry!==secondCountry){
                 canClick = false;
-                setTimeout(swapBack, 1000);
+                setTimeout(flipBack, 1000);
             }
             //si son par..
             else{
@@ -206,7 +206,7 @@ function swap(position, flag){
                 if(pairsFound==pairsAmount){
                     //Ganó el jugador 1
                     if(actualPlayerOnePoints>actualPlayerTwoPoints){
-                        setTimeout(winSwap, 500);
+                        setTimeout(winFlip, 500);
                         $("#table").append("<div id='announce'><p>¡Ganó el jugador 1!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
 
                         actualPlayerOnePoints=0;
@@ -214,7 +214,7 @@ function swap(position, flag){
                     }
                     //Ganó el jugador 2
                     else if(actualPlayerOnePoints<actualPlayerTwoPoints){
-                        setTimeout(winSwap, 500);
+                        setTimeout(winFlip, 500);
                         $("#table").append("<div id='announce'><p>¡Ganó el jugador 2!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
 
                         actualPlayerOnePoints=0;
@@ -222,7 +222,7 @@ function swap(position, flag){
                     }
                     //Empate!
                     else{
-                        setTimeout(winSwap, 500);
+                        setTimeout(winFlip, 500);
                         $("#table").append("<div id='announce'><p>¡Empate!</p><button onclick='loadGame()'>Jugar de nuevo</button> <button onclick='sureAbout()'>Reiniciar juego</button></div>");
 
                         actualPlayerOnePoints=0;
@@ -235,7 +235,7 @@ function swap(position, flag){
 }
 
 //Si no son par esta función los vuelve a girar y les devuelve la función de onclick.
-function swapBack(){
+function flipBack(){
     $("#"+first).removeClass("rotate").addClass("rotateBack");
     $("#"+second).removeClass("rotate").addClass("rotateBack");
 
@@ -274,7 +274,7 @@ function specialTile(position){
     }
 
 //giro de las fichas al ganar
-function winSwap(){
+function winFlip(){
     $(".flip-card-inner").removeClass("rotate");
     $(".flip-card-inner").addClass("rotateWin");
 }
